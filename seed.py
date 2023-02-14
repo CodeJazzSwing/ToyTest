@@ -1,7 +1,21 @@
 import json
 import sqlite3
 
-sqlite3 = ("toytable.db")
+def call_db(query: str):
+    print(query)
+    connection = sqlite3.connect("toytable.db")
+    cursor = connection.cursor()
+    res = cursor.executescript(query) #OBS! Changed this to 'executescript' from execute. Executescript is for many. 
+    data = res.fetchall()
+    cursor.close()
+    connection.commit()
+    connection.close()
+    return data
+
+
+data_from_college = call_db("SELECT * FROM college")
+
+
 
 create_table = """
 INSERT INTO college (
@@ -16,11 +30,11 @@ major VARCHAR (50)
 )
 """
 
+
 with open ("seed.json", "r") as seed:
     data = json.load(seed)
 
     for toytable in data:
-        sqlite3.call_db(create_table, college["first_name"], college["last_name"], college["email"], college["us_state"], college["birthdate"], ["major"])
+        call_db(create_table, college["first_name"], college["last_name"], college["email"], college["us_state"], college["birthdate"], ["major"])
 
 
-#TKTKTKTKTTKTKTKTK
