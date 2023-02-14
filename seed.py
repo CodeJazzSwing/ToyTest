@@ -1,11 +1,12 @@
 import json
 import sqlite3
 
-def call_db(query: str):
+
+def call_db(query: str, values:list):
     print(query)
     connection = sqlite3.connect("toytable.db")
     cursor = connection.cursor()
-    res = cursor.executescript(query) #OBS! Changed this to 'executescript' from execute. Executescript is for many. 
+    res = cursor.execute(query, values) #OBS! Executescript is for many. 
     data = res.fetchall()
     cursor.close()
     connection.commit()
@@ -13,28 +14,11 @@ def call_db(query: str):
     return data
 
 
-data_from_college = call_db("SELECT * FROM college")
-
-
-
-create_table = """
-INSERT INTO college (
-first_name VARCHAR (255),
-last_name VARCHAR (255),
-email VARCHAR (100),  
-us_state VARCHAR (50), 
-birthdate DATE,
-major VARCHAR (50)
-) VALUES (
-?, ?
-)
-"""
-
-
 with open ("seed.json", "r") as seed:
     data = json.load(seed)
 
-    for toytable in data:
-        call_db(create_table, college["first_name"], college["last_name"], college["email"], college["us_state"], college["birthdate"], ["major"])
-
-
+    for record in data:
+        print("Printing record...")
+        print(record)   
+        call_db("INSERT INTO college (first_name, last_name, email, us_state, birthdate, major) VALUES (?, ?, ?, ?, ?, ?)", 
+        [record.get("first_name"), record.get("last_name"), record.get("email"), record.get("us_state"), record.get("birthdate"), record.get("major")])
