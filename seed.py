@@ -21,4 +21,6 @@ with open ("seed.json", "r") as seed:
 
     for toytable in data:
         sqlite3.call_db(create_table, college["first_name"], college["last_name"], college["email"], college["us_state"], college["birthdate"], ["major"])
-    
+
+
+#TKTKTKTKTTKTKTKTK
