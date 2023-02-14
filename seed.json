@@ -1,0 +1,21 @@
+[
+    {
+        "first_name": "Eric",
+        "last_name": "Cartman",
+        "email": "eric@aol.com",
+        "us_state": "CO",
+        "birthdate":"1966-06-06",
+        "major": "Hellraiser"
+    },
+
+    {
+        "first_name": "Stan",
+        "last_name": "Marsh",
+        "email": "stan@aol.com",
+        "us_state": "CO",
+        "birthdate":"1966-03-204",
+        "major": "Engineering"
+    }
+
+
+]
